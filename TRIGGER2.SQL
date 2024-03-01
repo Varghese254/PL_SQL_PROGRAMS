@@ -1,0 +1,10 @@
+CREATE OR REPLACE TRIGGER SalaryRangeCheck
+BEFORE INSERT OR UPDATE ON employees
+FOR EACH ROW
+BEGIN
+IF :NEW.esal < 0 OR :NEW.esal > 5000 THEN
+RAISE_APPLICATION_ERROR(-20300, 'Salary must be in the
+range 0-5000');
+END IF;
+END;
+/
